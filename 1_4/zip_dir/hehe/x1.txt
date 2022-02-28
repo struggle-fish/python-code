@@ -1,0 +1,2 @@
+2022-02-27 20:57:20 - root - CRITICAL -9_logging模块: 系统炸了
+2022-02-27 20:57:20 - root - ERROR -9_logging模块: 你写的出bug
