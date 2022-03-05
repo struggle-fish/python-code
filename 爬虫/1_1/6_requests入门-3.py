@@ -19,3 +19,4 @@ resp = requests.get(url=url, params=paramsdata, headers=headers)
 # print(resp.request.url)
 print(resp.json())
 
+resp.close()  # 要关闭

@@ -12,5 +12,6 @@ resp = requests.post(url, data=dat)
 
 print(resp.json()) # 将数据处理成json
 
+resp.close()
 
 
