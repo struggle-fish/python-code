@@ -24,7 +24,7 @@ def read(path, ceng):
             # 普通文件
             print("\t" * ceng, name)
 
-read('../../python-code', 0)
+read('../..', 0)
 
 
 
