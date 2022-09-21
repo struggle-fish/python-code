@@ -159,7 +159,7 @@ l = [1, 'aaa', 'bbb', 'aaa', 'aaa']
 
 
 # 补充
-# 1、队列：FIFO,先进先出
+# 1、队列：FIFO,先进先出  吃了拉
 # l=[]
 # # 入队操作
 # l.append('first')
@@ -172,7 +172,7 @@ l = [1, 'aaa', 'bbb', 'aaa', 'aaa']
 # print(l.pop(0))
 # print(l.pop(0))
 
-# 2、堆栈：LIFO,后进先出
+# 2、堆栈：LIFO,后进先出  吃了吐
 l = []
 # 入栈操作
 l.append('first')
