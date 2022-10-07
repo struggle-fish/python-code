@@ -27,7 +27,8 @@
 
 y = 333
 z = 444
-import foo
+from modules import foo
+print(foo.get())
 # 1、首次导入模块会发生3件事
 # 1、执行foo.py
 # 2、产生foo.py的名称空间，将foo.py运行过程中产生的名字都丢到foo的名称空间中
@@ -69,7 +70,7 @@ import foo
 # import m
 
 # 不建议在一行同时导入多个模块
-import time, foo, m
+# import time, foo, m
 
 # 4、导入模块的规范
 # I. python内置模块
@@ -107,12 +108,12 @@ import time, foo, m
 
 
 # 6、模块是第一类对象
-import foo
+# import foo
 
 
 # 7、自定义模块的命名应该采用纯小写+下划线的风格
 
 
 # 8、可以在函数内导入模块
-def func():
-    import foo
+# def func():
+#     import foo
