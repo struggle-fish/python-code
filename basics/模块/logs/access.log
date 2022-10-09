@@ -1,0 +1,5 @@
+2022-10-09 16:46:24 PM - root - DEBUG -13日志模块:  调试debug
+2022-10-09 16:46:24 PM - root - INFO -13日志模块:  消息info
+2022-10-09 16:46:24 PM - root - WARNING -13日志模块:  警告warn
+2022-10-09 16:46:24 PM - root - ERROR -13日志模块:  egon提现失败
+2022-10-09 16:46:24 PM - root - CRITICAL -13日志模块:  严重critical
