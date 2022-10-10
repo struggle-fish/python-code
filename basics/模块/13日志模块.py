@@ -53,6 +53,7 @@ simple_format = '[%(levelname)s][%(asctime)s][%(filename)s:%(lineno)d]%(message)
 
 test_format = '%(asctime)s] %(message)s'
 
+
 # 3、日志配置字典
 LOGGING_DIC = {
     'version': 1,
@@ -83,7 +84,7 @@ LOGGING_DIC = {
             # 'maxBytes': 1024*1024*5,  # 日志大小 5M
             'maxBytes': 1000,
             'backupCount': 5,
-            'filename': os.path.join(os.path.dirname(os.path.dirname(__file__)), 'logs', 'a2.log'),
+            'filename': os.path.join(os.path.dirname(__file__), 'logs', 'a2.log'),
             # os.path.join(os.path.dirname(os.path.dirname(__file__)),'log','a2.log')
             'encoding': 'utf-8',
             'formatter': 'standard',
@@ -93,7 +94,7 @@ LOGGING_DIC = {
         'other': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',  # 保存到文件
-            'filename': 'a2.log',  # os.path.join(os.path.dirname(os.path.dirname(__file__)),'log','a2.log')
+            'filename': os.path.join(os.path.dirname(__file__), 'logs', 'a2.log'),  # os.path.join(os.path.dirname(os.path.dirname(__file__)),'log','a2.log')
             'encoding': 'utf-8',
             'formatter': 'test',
 
