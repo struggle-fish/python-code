@@ -2,10 +2,26 @@
 用户视图层
 '''
 
+from interface import user_interface
 
 # 1、注册功能
 def register():
-    pass
+    while True:
+        # 1) 让用户输入用户名与密码进行校验
+        username = input('请输入用户名：').strip()
+        password = input('请输入密码：').strip()
+        re_password = input('请确认密码：').strip()
+
+        # 小逻辑处理，两次输入密码是否一致
+        if password == re_password:
+            # 2) 调用接口层的注册接口，将用户名与密码交给接口层来进行处理
+            flag, msg = user_interface.register_interface(username, password)
+            print(flag, msg, '这个是什么')
+            if flag:
+                print(msg)
+                break
+            else:
+                print(msg)
 
 
 # 2、登录功能
@@ -52,6 +68,7 @@ def check_shop_car():
 def admin():
     pass
 
+
 # 创建函数字典
 func_dic = {
     '1': register,
@@ -65,6 +82,7 @@ func_dic = {
     '9': check_shop_car,
     '10': admin
 }
+
 
 # 视图层主程序
 def run():

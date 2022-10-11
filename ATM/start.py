@@ -2,8 +2,8 @@
 程序的入口
 '''
 
-import sys
 import os
+import sys
 
 # 添加解释器的环境变量
 sys.path.append(
