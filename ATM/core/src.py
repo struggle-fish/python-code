@@ -3,7 +3,9 @@
 '''
 
 from interface import user_interface
-
+from lib import common
+# 全局变量，记录用户是否已登录
+login_user = None
 
 # 1、注册功能
 def register():
@@ -40,41 +42,51 @@ def login():
         )
         if flag:
             print(msg)
+            global login_user
+            login_user = username
+            break
         else:
             print(msg)
 
 
 # 3、查看余额
+@common.login_auth
 def check_balance():
     pass
 
 
 # 4、提现功能
+@common.login_auth
 def withdraw():
     pass
 
 
 # 5、还款功能
+@common.login_auth
 def repay():
     pass
 
 
 # 6、转账功能
+@common.login_auth
 def transfer():
     pass
 
 
 # 7、查看流水
+@common.login_auth
 def check_flow():
     pass
 
 
 # 8、购物功能
+@common.login_auth
 def shopping():
     pass
 
 
 # 9、查看购物车
+@common.login_auth
 def check_shop_car():
     pass
 
