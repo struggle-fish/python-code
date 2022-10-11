@@ -21,6 +21,6 @@ def withdraw_interface(username, money):
         user_dic['balance'] = balance
         # 3）再保存数据，或更新数据
         db_handler.save(user_dic)
-        return True, f'用户[{username}] 提现金额{money}'
+        return True, f'用户[{username}] 提现金额{money}, 手续费为：[{money2 - float(money)}], 余额是[{balance}]'
 
     return False, '提现金额不足，请重新输入'
