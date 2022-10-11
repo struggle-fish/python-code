@@ -4,6 +4,7 @@
 
 from interface import user_interface
 
+
 # 1、注册功能
 def register():
     while True:
@@ -26,7 +27,21 @@ def register():
 
 # 2、登录功能
 def login():
-    pass
+    while True:
+        # 1) 让用户输入用户名与密码
+        username = input('请输入用户名').strip()
+        password = input('请输入密码').strip()
+        # 2）调用接口层，将数据传给登录接口
+        # (True, f'用户: [{username}] 登录成功!'),
+        # (return False, '密码错误'), (False, '用户不存在，请重新输入！')
+        flag, msg = user_interface.login_interface(
+            username,
+            password
+        )
+        if flag:
+            print(msg)
+        else:
+            print(msg)
 
 
 # 3、查看余额
