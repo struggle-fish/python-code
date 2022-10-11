@@ -1,7 +1,7 @@
 '''
 用户视图层
 '''
-
+import bank_interface
 from interface import user_interface
 from lib import common
 # 全局变量，记录用户是否已登录
@@ -52,13 +52,33 @@ def login():
 # 3、查看余额
 @common.login_auth
 def check_balance():
-    pass
+    balance = user_interface.check_bal_interface(
+        login_user
+    )
+    print(f'用户{login_user} 余额为：{balance}')
 
 
 # 4、提现功能
 @common.login_auth
 def withdraw():
-    pass
+    while True:
+        # 1) 让用户输入提现金额
+        input_money = input('请输入提现金额：').strip()
+
+        # 2) 判断用户输入的金额是否是数字
+        if not input_money.isdigit():
+            print('请重新输入')
+            continue
+        # 3) 用户提现金额，将提现的金额交付给接口层来处理
+        flag, msg = bank_interface.withdraw_interface(
+            login_user,
+            input_money
+        )
+        if flag:
+            print(msg)
+            break
+        else:
+            print(msg)
 
 
 # 5、还款功能
