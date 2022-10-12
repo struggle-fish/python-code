@@ -84,7 +84,33 @@ def withdraw():
 # 5、还款功能
 @common.login_auth
 def repay():
-    pass
+    '''
+        银行卡还款，无论是信用卡或储蓄卡，是否能充任意大小的金额
+        :return:
+    '''
+    while True:
+
+        # 1) 让用户输入还款金额
+        input_money = input('请输入需要还款金额：').strip()
+        # 2）判断用户输入的是否是数字
+        if not input_money.isdigit():
+            print('请输入正确的金额')
+            continue
+        input_money = int(input_money)
+        # 3) 判断用户输入的金额大于0
+        if input_money > 0:
+            # 4）调用还款接口
+            flag, msg = bank_interface.repay_interface(
+                login_user,
+                input_money
+            )
+            if flag:
+                print(msg)
+            else:
+                print(msg)
+        else:
+            print('输入的金额不能小于0')
+
 
 
 # 6、转账功能
