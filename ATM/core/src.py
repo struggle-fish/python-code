@@ -260,7 +260,10 @@ def shopping():
 # 9、查看购物车
 @common.login_auth
 def check_shop_car():
-    pass
+    shop_car = shop_interface.shopping_interface(
+        login_user
+    )
+    print(f'你购物车的内容是：{shop_car}')
 
 
 # 10、管理员功能

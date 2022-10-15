@@ -3,6 +3,9 @@
 
 '''
 from db import db_handler
+from lib import common
+# 根据不同的接口类型传入不同的日志对象log_type=
+shop_logger = common.get_logger(log_type='shop')
 
 
 # 商品准备结算
@@ -22,6 +25,7 @@ def shopping_interface(login_user, shopping_car):
     )
     if flag:
         msg = f'用户[{login_user}] 支付[{cost}$] 成功，准备发货'
+        shop_logger.info(msg)
         return True, msg
 
     return False, '支付失败，金额不足'
@@ -56,3 +60,9 @@ def add_shop_car_interface(login_user, shopping_car):
     db_handler.save(user_dic)
 
     return True, '添加购物车成功'
+
+
+# 查看购物车
+def check_shop_car_interface(username):
+    user_dic = db_handler.select(username)
+    return user_dic.get('shop_car')

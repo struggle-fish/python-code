@@ -3,6 +3,9 @@
 '''
 
 from db import db_handler
+from lib import common
+# 根据不同的接口类型传入不同的日志对象
+bank_logger = common.get_logger(log_type='bank')
 
 
 # 提现接口
@@ -25,6 +28,7 @@ def withdraw_interface(username, money):
 
         # 3）再保存数据，或更新数据
         db_handler.save(user_dic)
+        bank_logger.info(flow)
         return True, flow
 
     return False, '提现金额不足，请重新输入'

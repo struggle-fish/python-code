@@ -5,6 +5,9 @@
 from db import db_handler
 from lib import common
 
+# 根据不同的接口类型传入不同的日志对象
+user_logger = common.get_logger(log_type='user')
+
 
 # 注册接口
 def register_interface(username, password, balance=15000, ):
@@ -30,7 +33,10 @@ def register_interface(username, password, balance=15000, ):
 
     # 保存数据
     db_handler.save(user_dic)
-    return True, f'{username} 注册成功'
+    msg = f'{username} 注册成功'
+    # 3.3）记录日志
+    user_logger.info(msg)
+    return True, msg
 
 
 # 登录接口
@@ -48,10 +54,17 @@ def login_interface(username, password):
         # 3) 校验密码是否一致
         password = common.get_pwd_md5(password)
         if password == user_dic.get('password'):
-            return True, f'用户：[{username}] 登录成功'
+            msg = f'用户：[{username}] 登录成功'
+            user_logger.info(msg)
+            return True, msg
         else:
-            return False, '密码错误'
-    return False, '用户不存在，请重新输入！'
+            msg = f'用户[{username}] 密码错误'
+            user_logger.warn(msg)
+            return False, msg
+
+    msg = f'用户[{username}] 用户不存在，请重新输入'
+    user_logger.warn(msg)
+    return False, msg
 
 
 # 查看余额接口
