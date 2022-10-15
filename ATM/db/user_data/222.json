@@ -1,1 +1,1 @@
-{"username": "222", "password": "d6d622675af19ef7f8aab6a9b1f49bee", "balance": 13727.0, "flow": [], "shop_car": {}, "locked": false}
+{"username": "222", "password": "d6d622675af19ef7f8aab6a9b1f49bee", "balance": 24615.0, "flow": ["用户 [222] 接收 用户：[222] 转的[888$] 到账了", "用户 [222] 接收 用户：[222] 转的[10000$] 到账了"], "shop_car": {}, "locked": false}

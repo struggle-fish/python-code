@@ -152,7 +152,14 @@ def transfer():
 # 7、查看流水
 @common.login_auth
 def check_flow():
-    pass
+    flow_list = bank_interface.check_flow_interface(
+        login_user
+    )
+    if flow_list:
+        for flow in flow_list:
+            print(flow)
+    else:
+        print('当前用户没有流水')
 
 
 # 8、购物功能
