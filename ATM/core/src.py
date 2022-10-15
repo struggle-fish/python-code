@@ -4,8 +4,10 @@
 import bank_interface
 from interface import user_interface
 from lib import common
+
 # 全局变量，记录用户是否已登录
 login_user = None
+
 
 # 1、注册功能
 def register():
@@ -112,7 +114,6 @@ def repay():
             print('输入的金额不能小于0')
 
 
-
 # 6、转账功能
 @common.login_auth
 def transfer():
@@ -176,7 +177,8 @@ def check_shop_car():
 
 # 10、管理员功能
 def admin():
-    pass
+    from core import admin
+    admin.admin_run()
 
 
 # 创建函数字典

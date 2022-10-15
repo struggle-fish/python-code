@@ -40,6 +40,11 @@ def login_interface(username, password):
 
     # 2) 判断用户是否存在
     if user_dic:
+
+        # 用户是否被冻结
+        if user_dic.get('locked'):
+            return False, '当前用户已被锁定'
+
         # 3) 校验密码是否一致
         password = common.get_pwd_md5(password)
         if password == user_dic.get('password'):
