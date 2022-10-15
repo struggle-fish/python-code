@@ -2,6 +2,7 @@
 用户视图层
 '''
 import bank_interface
+import shop_interface
 from interface import user_interface
 from lib import common
 
@@ -164,9 +165,96 @@ def check_flow():
 
 
 # 8、购物功能
+# 注意: 该功能比较 "长" 需要花更多的时间，写的过程中一定要记住，先写好思路
 @common.login_auth
 def shopping():
-    pass
+    # 不从文件中读取商品数据，直接写（ps: 课后作业，从文件中读取商品数据）
+    # 1）创建一个商品列表
+    # 列表套列表的商品数据
+    # [[商品名称1, 商品单价1], [商品名称2, 商品单价2]...]
+    shop_list = [
+        ['上海灌汤包', 30],
+        ['矮跟写真抱枕', 250],  # 1
+        ['广东凤爪', 28],
+        ['香港地道鱼丸', 15],
+        ['坦克', 100000],
+        ['macbook', 20000],
+    ]
+    # 初始化当前购物车:
+    shopping_car = {}
+    # {'商品名称': ['单价', '数量']]}
+    while True:
+        # 1) 打印商品信息，让用户选择
+        # 枚举: enumerate(可迭代对象) ---> (可迭代对象的索引， 索引对应的值)
+        # 枚举: enumerate(可迭代对象) ---> (0, ['上海灌汤包', 30])
+        print('============欢迎来到有趣用品商城============')
+        for index, shop in enumerate(shop_list):
+            shop_name, shop_price = shop
+            print(
+                f'商品编号：[{index}]',
+                f'商品名称：[{shop_name}]',
+                f'商品单价：[{shop_price}]'
+            )
+        print('================24小时服务哦==============')
+        # 2) 让用户根据商品编号进行选择
+        choice = input('请输入商品编号（是否结账输入 y or n）').strip()
+        # 2.1) 输入的是 y 进入支付结算功能
+        if choice == 'y':
+            if not shopping_car:
+                print('购物车是空的，不能支付，请重新输入')
+                continue
+
+            # 6) 调用支付接口进行支付
+            flag, msg = shop_interface.shopping_interface(
+                login_user,
+                shopping_car
+            )
+            if flag:
+                print(msg)
+                break
+            else:
+                print(msg)
+        # 2.2) 输入的是 n 添加购物车
+        if choice == 'n':
+            # 判断当前用户是否添加过购物车
+            if not shopping_car:
+                # TODO:这里不是很懂哎，空的为什么还不能添加呢
+                print('购物车是空的，不能能添加，请重新输入')
+                continue
+
+            # 7）调用添加购物车接口
+            flag, msg = shop_interface.add_shop_car_interface(
+                login_user,
+                shopping_car
+            )
+            if flag:
+                print(msg)
+                break
+
+        if not choice.isdigit():
+            print('请输入正确的编号')
+            continue
+
+        choice = int(choice)
+
+        # 3) 判断choice是否存在
+        if choice not in range(len(shop_list)):
+            print('请输入正确的编号')
+            continue
+        # 4) 获取商品名称和与单价
+        shop_name, shop_price = shop_list[choice]
+
+        # 5）加入购物车
+        # 5.1） 判断用户选择的商品是否重复，重复则数量 +1
+        if shop_name in shopping_car:
+            # [shop_price, 1][1] ---> 1 += 1
+            # 添加商品数量
+            shopping_car[shop_name][1] += 1
+        else:
+            # 否则数量默认为1
+            # {'商品名称': ['单价', '数量']]}
+            shopping_car[shop_name] = [shop_price, 1]
+        print('当前购物车：', shopping_car)
 
 
 # 9、查看购物车

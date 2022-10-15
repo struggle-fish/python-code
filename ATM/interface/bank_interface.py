@@ -99,4 +99,22 @@ def check_flow_interface(login_user):
     return user_dic.get('flow')
 
 
+# 支付接口
+def pay_interface(login_user, cost):
+    user_dic = db_handler.select(login_user)
+    # 判断用户金额是否足够
+    if user_dic.get('balance') >= cost:
+        # 减
+        user_dic['balance'] -= cost
+
+        # 记录消费流水
+        flow = f'用户消费金额：[{cost}$]'
+        user_dic['flow'].append(flow)
+
+        # 保存数据
+        db_handler.save(user_dic)
+
+        return True
+    return False
+
 
