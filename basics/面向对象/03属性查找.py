@@ -1,38 +1,38 @@
-
 class Student:
     # 1、变量的定义
-    stu_school='oldboy'
-    count=0
+    stu_school = 'oldboy'
+    count = 0
 
     # 空对象,'egon',18,'male'
-    def __init__(self,x,y,z):
+    def __init__(self, x, y, z):
         Student.count += 1
 
-        self.stu_name=x # 空对象.stu_name='egon'
-        self.stu_age=y  # 空对象.stu_age=18
-        self.stu_gender=z # 空对象.stu_gender='male'
+        self.stu_name = x  # 空对象.stu_name='egon'
+        self.stu_age = y  # 空对象.stu_age=18
+        self.stu_gender = z  # 空对象.stu_gender='male'
         # return None
 
     # 2、功能的定义
     def tell_stu_info(self):
-        print('学生信息：名字：%s 年龄：%s 性别：%s' %(
+        print('学生信息：名字：%s 年龄：%s 性别：%s' % (
             self.stu_name,
             self.stu_age,
             self.stu_gender
         ))
 
-    def set_info(self,x,y,z):
-        self.stu_name=x
-        self.stu_age=y
-        self.stu_gender=z
+    def set_info(self, x, y, z):
+        self.stu_name = x
+        self.stu_age = y
+        self.stu_gender = z
 
-    def choose(self,x):
+    def choose(self, x):
         print('正在选课')
-        self.course=x
+        self.course = x
 
-stu1_obj=Student('egon',18,'male') # Student.__init__(空对象,'egon',18,'male')
-stu2_obj=Student('lili',19,'female')
-stu3_obj=Student('jack',20,'male')
+
+stu1_obj = Student('egon', 18, 'male')  # Student.__init__(空对象,'egon',18,'male')
+stu2_obj = Student('lili', 19, 'female')
+stu3_obj = Student('jack', 20, 'male')
 
 # print(stu1_obj.count)
 # print(stu2_obj.count)
@@ -96,9 +96,8 @@ stu3_obj=Student('jack',20,'male')
 # print(stu3_obj.course)
 
 
-
-l1=['aa','bb','cc'] # l=list([1,2,3])
-l2=[111,222,333] # l=list([1,2,3])
+# l1 = ['aa', 'bb', 'cc']  # l=list([1,2,3])
+# l2 = [111, 222, 333]  # l=list([1,2,3])
 # print(l1.append)
 # print(list.append)
 
