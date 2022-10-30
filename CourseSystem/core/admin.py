@@ -4,7 +4,7 @@
 '''
 
 from interface import admin_interface
-
+from lib import common
 admin_info = {
     'user': None
 }
@@ -52,16 +52,19 @@ def login():
 
 
 # 3.创建学校
+@common.auth('admin')
 def create_school():
     pass
 
 
 # 4.创建课程
+@common.auth('admin')
 def create_course():
     pass
 
 
 # 5.创建讲师
+@common.auth('admin')
 def create_teacher():
     pass
 

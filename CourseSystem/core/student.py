@@ -1,7 +1,11 @@
 '''
 学生视图
 '''
+from lib import common
 
+student_info = {
+    'user': None
+}
 
 # 1.注册
 def register():
@@ -14,16 +18,19 @@ def login():
 
 
 # 3.选择校区
+@common.auth('student')
 def choice_school():
     pass
 
 
 # 4.选择课程
+@common.auth('student')
 def choice_course():
     pass
 
 
 # 5.查看分数
+@common.auth('student')
 def check_score():
     pass
 

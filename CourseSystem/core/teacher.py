@@ -2,6 +2,10 @@
 老师视图
 
 '''
+from lib import common
+teacher_info = {
+    'user': None
+}
 
 
 # 1.登录
@@ -10,21 +14,25 @@ def login():
 
 
 # 2.查看教授课程
+@common.auth('teacher')
 def check_course():
     pass
 
 
 # 3.选择教授课程
+@common.auth('teacher')
 def choose_course():
     pass
 
 
 # 4.查看课程下学生
+@common.auth('teacher')
 def check_stu_from_course():
     pass
 
 
 # 5.修改学生分数
+@common.auth('teacher')
 def change_score_from_student():
     pass
 
