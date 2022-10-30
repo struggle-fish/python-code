@@ -4,6 +4,11 @@
 '''
 
 from interface import admin_interface
+
+admin_info = {
+    'user': None
+}
+
 # 1.注册
 def register():
     while True:
@@ -28,7 +33,22 @@ def register():
 
 # 2.登录
 def login():
-    pass
+    while True:
+        username = input('请输入用户名').strip()
+        password = input('请输入密码').strip()
+        # 1、调用管理员登录接口
+        flag, msg = admin_interface.admin_login_interface(
+            username,
+            password
+        )
+        if flag:
+            print(msg)
+            # 记录当前用户登录状态
+            # 可变类型不需要global
+            admin_info['user'] = username
+            break
+        else:
+            print(msg)
 
 
 # 3.创建学校

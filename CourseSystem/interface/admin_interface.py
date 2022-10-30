@@ -22,3 +22,15 @@ def admin_register_interface(username, password):
     admin_obj.save()
     return True, '注册成功'
 
+
+def admin_login_interface(username, password):
+    # 1、判断用户是否存在
+    admin_obj = models.Admin.select(username)
+    # 2、若不存在，则证明用户不存在
+    if not admin_obj:
+        return False, '用户名不存在'
+    # 3、若存在，则校验密码
+    if password == admin_obj.pwd:
+        return True, '登录成功'
+    else:
+        return False, '密码错误'
