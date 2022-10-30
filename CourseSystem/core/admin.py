@@ -3,7 +3,7 @@
 
 '''
 
-
+from interface import admin_interface
 # 1.注册
 def register():
     while True:
@@ -13,7 +13,15 @@ def register():
         # 密码判断
         if password == re_password:
             # 调用接口，管理员注册
-            pass
+            flag, msg = admin_interface.admin_register_interface(
+                username,
+                password
+            )
+            if flag:
+                print(msg)
+                break
+            else:
+                print(msg)
         else:
             print('两次密码不一致，请重新输入')
 
