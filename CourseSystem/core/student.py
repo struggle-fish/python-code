@@ -91,7 +91,42 @@ def choice_school():
 # 4.选择课程
 @common.auth('student')
 def choice_course():
-    pass
+    while True:
+        # 1、先获取 "当前学生" 所在学校的课程列表
+        flag, course_list = student_interface.get_course_list_interface(
+            student_info.get('user')
+        )
+        if not flag:
+            print(course_list)
+            break
+
+        # 2、打印课程列表，并让用户选择课程
+        for index, school_name in enumerate(course_list):
+            print(f'编号: {index}   学校名: {school_name}')
+
+        # 2、让学生输入学校编号
+        choice = input('请输入选择的学校编号: ').strip()
+        if not choice.isdigit():
+            print('输入有误')
+            continue
+
+        choice = int(choice)
+
+        if choice not in range(len(course_list)):
+            print('输入编号有误!')
+            continue
+        # 3、获取选择的课程名称
+        course_name = course_list[choice]
+        # 4、调用学生选择课程接口
+        flag, msg = student_interface.add_course_interface(
+            course_name, student_info.get('user')
+        )
+
+        if flag:
+            print(msg)
+            break
+        else:
+            print(msg)
 
 
 # 5.查看分数
