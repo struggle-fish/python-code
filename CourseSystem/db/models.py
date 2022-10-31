@@ -61,7 +61,16 @@ class School(Base):
 
 
 class Student(Base):
-    pass
+    def __init__(self, user, pwd):
+        self.user = user
+        self.pwd = pwd
+        # 每个学生只能有一个校区
+        self.school = None
+        # 一个学生可以选择多门课程
+        self.course_list = []
+        # 学生课程分数
+        # {"course_name": 0}
+        self.score_dict = {}
 
 
 class Course(Base):

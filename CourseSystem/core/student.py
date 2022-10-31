@@ -2,14 +2,30 @@
 学生视图
 '''
 from lib import common
-
+from interface import student_interface
 student_info = {
     'user': None
 }
 
 # 1.注册
 def register():
-    pass
+    while True:
+        username = input('请输入用户名: ').strip()
+        password = input('请输入密码: ').strip()
+        re_password = input('请确认密码: ').strip()
+        # 小的逻辑判断
+        if password == re_password:
+            # 调用接口层，学生注册接口
+            flag, msg = student_interface.student_register_interface(
+                username, password
+            )
+            if flag:
+                print(msg)
+                break
+            else:
+                print(msg)
+        else:
+            print('两次密码不一致，请重新输入')
 
 
 # 2.登录功能
