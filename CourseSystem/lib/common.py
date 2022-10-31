@@ -42,24 +42,3 @@ def auth(role):
     return login_auth
 
 
-# 公共登录接口
-def login_interface(user, pwd, user_type):
-    if user_type == 'admin':
-        obj = models.Admin.select(user)
-    elif user_type == 'student':
-        obj = models.Student.select(user)
-    elif user_type == 'teacher':
-        obj = models.Teacher.select(user)
-    else:
-        return False, '登录角色不对，请输入角色'
-
-    # 1.判断用户是否存在
-    if obj:
-        # 2.若用户存在，则校验密码
-        if pwd == obj.pwd:
-            return True, '登录成功'
-        else:
-            return False, '密码错误'
-    # 3.若不存在，则证明用户不存在并返回给视图层
-    else:
-        return False, '用户名不存在'

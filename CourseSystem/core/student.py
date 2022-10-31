@@ -4,6 +4,7 @@
 from lib import common
 from interface import student_interface
 from interface import common_interface
+
 student_info = {
     'user': None
 }
@@ -53,7 +54,38 @@ def login():
 # 3.选择校区
 @common.auth('student')
 def choice_school():
-    pass
+    while True:
+        # 1、获取所有学校，让学生选择
+        flag, school_list = common_interface.get_all_school_interface()
+        if not flag:
+            print(school_list)
+            break
+
+        for index, school_name in enumerate(school_list):
+            print(f'编号： {index} 学校名：{school_name}')
+
+        # 2、让学生输入学校编号
+        choice = input('请输入选择的学校编号：').strip()
+        if not choice.isdigit():
+            print('输入有误')
+            continue
+
+        choice = int(choice)
+        if choice not in range(len(school_list)):
+            print('输入编号有误')
+            continue
+
+        school_name = school_list[choice]
+        # 3、开始调用学生选择学校接口
+        flag, msg = student_interface.add_school_interface(
+            school_name,
+            student_info.get('user')
+        )
+        if flag:
+            print(msg)
+            break
+        else:
+            print(msg)
 
 
 # 4.选择课程

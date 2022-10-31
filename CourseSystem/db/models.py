@@ -72,6 +72,11 @@ class Student(Base):
         # {"course_name": 0}
         self.score_dict = {}
 
+    # 学生添加学校方法
+    def add_school(self, school_name):
+        self.school = school_name
+        self.save()
+
 
 class Course(Base):
     def __init__(self, course_name):
