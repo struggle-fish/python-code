@@ -3,6 +3,7 @@
 
 '''
 from lib import common
+from interface import common_interface
 teacher_info = {
     'user': None
 }
@@ -10,6 +11,23 @@ teacher_info = {
 
 # 1.登录
 def login():
+    while True:
+        username = input('请输入用户名: ').strip()
+        password = input('请输入密码: ').strip()
+
+        # 1.调用管理员登录接口
+        flag, msg = common_interface.login_interface(
+            username, password, user_type='teacher'
+        )
+        if flag:
+            print(msg)
+            # 记录当前用户登录状态
+            # 可变类型不需要global
+            teacher_info['user'] = username
+            break
+
+        else:
+            print(msg)
     pass
 
 

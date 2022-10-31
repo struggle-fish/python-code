@@ -40,9 +40,10 @@ def login():
         username = input('请输入用户名').strip()
         password = input('请输入密码').strip()
         # 1、调用管理员登录接口
-        flag, msg = admin_interface.admin_login_interface(
+        flag, msg = common_interface.login_interface(
             username,
-            password
+            password,
+            user_type='admin'
         )
         if flag:
             print(msg)

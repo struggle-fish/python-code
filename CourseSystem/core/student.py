@@ -3,9 +3,11 @@
 '''
 from lib import common
 from interface import student_interface
+from interface import common_interface
 student_info = {
     'user': None
 }
+
 
 # 1.注册
 def register():
@@ -30,7 +32,22 @@ def register():
 
 # 2.登录功能
 def login():
-    pass
+    while True:
+        username = input('请输入用户名: ').strip()
+        password = input('请输入密码: ').strip()
+        # 1.登录接口
+        flag, msg = common_interface.login_interface(
+            username, password, user_type='student'
+        )
+        if flag:
+            print(msg)
+            # 记录当前用户登录状态
+            # 可变类型不需要global
+            student_info['user'] = username
+            break
+
+        else:
+            print(msg)
 
 
 # 3.选择校区
