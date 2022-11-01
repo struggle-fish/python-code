@@ -132,7 +132,15 @@ def choice_course():
 # 5.查看分数
 @common.auth('student')
 def check_score():
-    pass
+    # 1、直接调用查看分数接口
+    score_dict = student_interface.check_score_interface(
+        student_info.get('user')
+    )
+
+    if not score_dict:
+        print('没有选择课程!')
+
+    print(score_dict)
 
 
 func_dict = {
