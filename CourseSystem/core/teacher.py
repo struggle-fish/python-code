@@ -4,6 +4,8 @@
 '''
 from lib import common
 from interface import common_interface
+from interface import teacher_interface
+
 teacher_info = {
     'user': None
 }
@@ -34,7 +36,13 @@ def login():
 # 2.查看教授课程
 @common.auth('teacher')
 def check_course():
-    pass
+    flag, course_list = teacher_interface.check_course_interface(
+        teacher_info.get('user')
+    )
+    if flag:
+        print(course_list)
+    else:
+        print(course_list)
 
 
 # 3.选择教授课程

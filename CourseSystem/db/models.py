@@ -104,3 +104,7 @@ class Teacher(Base):
         self.pwd = teacher_pwd
 
         self.course_list_from_tea = []
+
+    # 老师查看教授课程方法
+    def show_course(self):
+        return self.course_list_from_tea
