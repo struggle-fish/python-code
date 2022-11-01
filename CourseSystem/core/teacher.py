@@ -156,7 +156,79 @@ def check_stu_from_course():
 # 5.修改学生分数
 @common.auth('teacher')
 def change_score_from_student():
-    pass
+    '''
+    # 1、先获取老师下所有的课程，并选择
+    # 2、获取选择的课程下所有的学生，并选择修改的学生
+    # 3、调用修改学生分数接口修改分数
+    '''
+    while True:
+        # 1、调用获取当前老师下所有的课程接口
+        flag, course_list = teacher_interface.check_course_interface(
+            teacher_info.get('user')
+        )
+        if not flag:
+            print(course_list)
+            break
+
+        # 2、打印所有课程，并让老师选择
+        for index, course_name in enumerate(course_list):
+            print(f'编号: {index}   课程名: {course_name}')
+
+        choice = input('请输入选择的课程编号: ').strip()
+
+        if not choice.isdigit():
+            print('输入有误')
+            continue
+
+        choice = int(choice)
+
+        if choice not in range(len(course_list)):
+            print('输入编号有误!')
+            continue
+
+        # 3、获取选择的课程名称
+        course_name = course_list[choice]
+
+        # 4、利用当前课程名称获取所有学生
+        flag2, student_list = teacher_interface.get_student_interface(
+            course_name, teacher_info.get('user')
+        )
+
+        if not flag2:
+            print(student_list)
+            break
+
+        # 5、打印所有学生让老师选择
+        for index2, student_name in enumerate(student_list):
+            print(f'编号：{index2}   学生名: {student_name}')
+
+        choice2 = input('请输入学生编号： ').strip()
+
+        choice2 = int(choice2)
+
+        if choice2 not in range(len(student_list)):
+            print('输入编号有误!')
+            continue
+
+        # 获取选择的课程名称
+        student_name = student_list[choice2]
+
+        # 老师输入需要修改的分数
+        score = input('请输入需要修改的成绩:').strip()
+        if not score.isdigit():
+            continue
+
+        score = int(score)
+
+        # 6、调用修改学生分数接口修改分数
+        flag3, msg = teacher_interface.change_score_interface(
+            course_name, student_name,
+            score, teacher_info.get('user')
+        )
+
+        if flag3:
+            print(msg)
+            break
 
 
 func_dict = {

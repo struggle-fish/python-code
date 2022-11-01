@@ -120,3 +120,12 @@ class Teacher(Base):
     def get_student(self, course_name):
         course_obj = Course.select(course_name)
         return course_obj.student_list
+
+    # 老师修改学生分数方法
+    def change_score(self, course_name, student_name, score):
+        # 1、获取学生对象
+        student_obj = Student.select(student_name)
+
+        # 2、再给学生对象中的课程修改分数
+        student_obj.score_dict[course_name] = score
+        student_obj.save()

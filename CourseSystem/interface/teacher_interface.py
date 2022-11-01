@@ -49,3 +49,14 @@ def get_student_interface(course_name, teacher_name):
         return False, '学生没有选择该课程'
 
     return True, student_list
+
+
+# 老师修改分数接口
+def change_score_interface(course_name, student_name, score, teacher_name):
+    # 1、获取老师对象
+    teacher_obj = models.Teacher.select(teacher_name)
+
+    # 2、让老师对象调用修改分数方法
+    teacher_obj.change_score(course_name, student_name, score)
+
+    return True, '修改分数成功！'
