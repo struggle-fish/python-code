@@ -108,3 +108,12 @@ class Teacher(Base):
     # 老师查看教授课程方法
     def show_course(self):
         return self.course_list_from_tea
+
+    # 老师添加课程方法
+    def add_course(self, course_name):
+        self.course_list_from_tea.append(
+            course_name
+        )
+        self.save()
+
+

@@ -43,3 +43,17 @@ def login_interface(user, pwd, user_type):
     # 3.若不存在，则证明用户不存在并返回给视图层
     else:
         return False, '用户名不存在'
+
+
+# 获取学校下所有课程接口
+def get_course_in_school_interface(school_name):
+    # 1、获取学校对象
+    school_obj = models.School.select(school_name)
+
+    # 2、获取学校对象下所有课程
+    course_list = school_obj.course_list
+
+    if not course_list:
+        return False, '该学校没有课程'
+
+    return True, course_list
