@@ -116,4 +116,7 @@ class Teacher(Base):
         )
         self.save()
 
-
+    # 老师获取课程下学生方法
+    def get_student(self, course_name):
+        course_obj = Course.select(course_name)
+        return course_obj.student_list

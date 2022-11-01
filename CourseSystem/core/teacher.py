@@ -112,7 +112,45 @@ def choose_course():
 # 4.查看课程下学生
 @common.auth('teacher')
 def check_stu_from_course():
-    pass
+    while True:
+        # 1、调用获取当前老师下所有的课程接口
+        flag, course_list = teacher_interface.check_course_interface(
+            teacher_info.get('user')
+        )
+        if not flag:
+            print(course_list)
+            break
+
+        # 2、打印所有课程，并让老师选择
+        for index, course_name in enumerate(course_list):
+            print(f'编号: {index}   课程名: {course_name}')
+
+        choice = input('请输入选择的课程编号: ').strip()
+
+        if not choice.isdigit():
+            print('输入有误')
+            continue
+
+        choice = int(choice)
+
+        if choice not in range(len(course_list)):
+            print('输入编号有误!')
+            continue
+
+        # 3、获取选择的课程名称
+        course_name = course_list[choice]
+
+        # 4、利用当前课程名称获取所有学生
+        flag2, student_list = teacher_interface.get_student_interface(
+            course_name, teacher_info.get('user')
+        )
+
+        if flag2:
+            print(student_list)
+            break
+        else:
+            print(student_list)
+            break
 
 
 # 5.修改学生分数

@@ -34,3 +34,18 @@ def add_course_interface(course_name, teacher_name):
     teacher_obj.add_course(course_name)
 
     return True, '添加课程成功!'
+
+
+# 老师获取课程下学生接口
+def get_student_interface(course_name, teacher_name):
+    # 1、获取当前老师对象
+    teacher_obj = models.Teacher.select(teacher_name)
+
+    # 2、让当前老师对象，调用获取课程下所有学生功能
+    student_list = teacher_obj.get_student(course_name)
+
+    # 3、判断课程下是否有学生
+    if not student_list:
+        return False, '学生没有选择该课程'
+
+    return True, student_list
