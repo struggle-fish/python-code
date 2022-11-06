@@ -44,7 +44,7 @@ while True:
             # 2、先把头的长度发过去
             x = struct.pack('i', len(json_str_bytes))
             conn.send(x)
- 
+
             # 3、发头信息
             conn.send(json_str_bytes)
             # 4、再发真实的数据
