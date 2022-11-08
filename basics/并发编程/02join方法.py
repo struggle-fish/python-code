@@ -30,4 +30,3 @@ if __name__ == '__main__':
     for p in p_list:
         p.join()
     print('主', time.time() - start_time)
- 
