@@ -236,6 +236,7 @@
 # 语法糖：让你开心的语法
 import time
 
+
 # 装饰器
 # def timmer(func):
 #     def wrapper(*args,**kwargs):
@@ -266,14 +267,12 @@ import time
 # home('egon')
 
 
-
 # 思考题（选做），叠加多个装饰器，加载顺序与运行顺序
 # @deco1 # index=deco1(deco2.wrapper的内存地址)
 # @deco2 # deco2.wrapper的内存地址=deco2(deco3.wrapper的内存地址)
 # @deco3 # deco3.wrapper的内存地址=deco3(index)
 # def index():
 #     pass
-
 
 
 # 总结无参装饰器模板
@@ -286,134 +285,24 @@ import time
 #     return wrapper
 
 
-
-
-
-
-
-
 def auth(func):
-    def wrapper(*args,**kwargs):
+    def wrapper(*args, **kwargs):
         # 1、调用原函数
         # 2、为其增加新功能
-        name=input('your name>>: ').strip()
-        pwd=input('your password>>: ').strip()
+        name = input('your name>>: ').strip()
+        pwd = input('your password>>: ').strip()
         if name == 'egon' and pwd == '123':
-            res=func(*args,**kwargs)
+            res = func(*args, **kwargs)
             return res
         else:
             print('账号密码错误')
-    return wrapper
 
+    return wrapper
 
 
 @auth
 def index():
     print('from index')
 
+
 index()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
