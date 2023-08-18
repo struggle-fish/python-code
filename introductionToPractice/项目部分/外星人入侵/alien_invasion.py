@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 
 class AlienInvasion:
@@ -11,22 +12,45 @@ class AlienInvasion:
     def __init__(self):
         '''初始化游戏并创建游戏资源'''
         pygame.init()
-        self.settins = Settings()
+        self.settings = Settings()
         # 窗口大小
-        self.screen = pygame.display.set_mode((self.settins.screen_width, self.settins.screen_height))
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption('Alien Invasion')
+
+        self.ship = Ship(self)
 
     def run_game(self):
         '''开始游戏主循环'''
         while True:
-            # 监听键盘和鼠标事件
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self._check_events()
+            self.ship.update()
             # 让最近绘制的屏幕可见
-            self.screen.fill(self.settins.bg_color)
+            self._update_screen()
 
-            pygame.display.flip()
+    def _check_events(self):
+        # 监听键盘和鼠标事件
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                # 向右移动飞船
+                if event.key == pygame.K_RIGHT:
+                    # 向右移动
+                    self.ship.moving_right = True
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = True
+
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
+                elif event.key == pygame.K_LEFT:
+                    self.ship.moving_left = False
+
+    def _update_screen(self):
+        # 更新屏幕上的图像，切换到新屏幕
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()  # 将图片绘制到屏幕上
+        pygame.display.flip()
 
 
 if __name__ == '__main__':
