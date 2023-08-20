@@ -10,6 +10,8 @@ from alien import Alien
 
 from game_stats import GameStats
 
+from button import Button
+
 
 class AlienInvasion:
     '''管理游戏资源和行为的类'''
@@ -35,6 +37,9 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        # 创建play 按钮
+        self.play_button = Button(self, 'Play')
 
     def run_game(self):
         '''开始游戏主循环'''
@@ -192,6 +197,28 @@ class AlienInvasion:
 
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
+
+    def _check_play_button(self, mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        '''在玩家点击play时候开始游戏'''
+        '''
+        仅当玩家单击了Play按钮且游戏当前处于非活动状态时，游戏才重新开始
+        '''
+        if button_clicked and not self.stats.game_active:
+            # 重置统计信息
+            self.stats.reset_stats()
+            self.stats.game_active = True
+
+            # 清空余下的外星人和子弹
+            self.aliens.empty()
+            self.bullets.empty()
+
+            # 创建一群新的外星人并让飞船居中
+            self._create_fleet()
+            self.ship.center_ship()
 
     def _check_keydown_events(self, event):
         # 向右移动飞船
@@ -224,6 +251,11 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        # 如果游戏处于非活动状态，就绘制开始按钮
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+
         pygame.display.flip()
 
 
