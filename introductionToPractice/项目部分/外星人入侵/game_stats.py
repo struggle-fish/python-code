@@ -13,6 +13,7 @@ class GameStats:
         '''初始化统计信息'''
         self.settings = ai_game.settings
         self.reset_stats()
+        self.high_score = 0
 
         # 游戏刚启动时处于活动状态
         self.game_active = False

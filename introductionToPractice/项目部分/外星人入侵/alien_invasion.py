@@ -115,6 +115,15 @@ class AlienInvasion:
         这样被击中的外星人将消失，但所有的子弹都始终有效，直到抵达屏幕顶端后消失。）
         '''
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        if collisions:
+            '''
+            如果字典collisions存在，就遍历其中的所有值。别忘了，每个值都是一个列表，包含被同一颗子弹击中的所有外星人。对于每个列表，都将其包含的外星人数量乘以一个外星人的分数，并将结果加入当前得分。为测试这一点，
+            请将子弹宽度改为300像素，并核实得到了其击中的每个外星人的分数，再将子弹宽度恢复正常值。
+            '''
+            for aliens in collisions.values():
+                self.stats.score += self.settings.alien_points * len(aliens)
+            self.sb.prep_score()
+            self.sb.check_high_score()
         '''
         
         检查编组aliens是否为空。空编组相当于False，因此这是一种检查编组是否为空的简单方式。如果编组aliens为空
@@ -125,6 +134,9 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+            # 提高等级
+            self.stats.level += 1
+            self.sb.prep_level()
 
     def _update_aliens(self):
         '''更新外星人群中所有外星人的位置'''
@@ -217,7 +229,8 @@ class AlienInvasion:
             # 重置统计信息
             self.stats.reset_stats()
             self.stats.game_active = True
-
+            self.sb.prep_score()
+            self.sb.prep_level()
             # 清空余下的外星人和子弹
             self.aliens.empty()
             self.bullets.empty()
