@@ -172,6 +172,7 @@ class AlienInvasion:
             sleep(1)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_fleet_edges(self):
         '''有外星人到达边缘采取相应措施'''
@@ -219,6 +220,8 @@ class AlienInvasion:
             # 创建一群新的外星人并让飞船居中
             self._create_fleet()
             self.ship.center_ship()
+            # 隐藏鼠标
+            pygame.mouse.set_visible(False)
 
     def _check_keydown_events(self, event):
         # 向右移动飞船
