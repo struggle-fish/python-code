@@ -1,4 +1,6 @@
 import pygame.font
+from pygame.sprite import Group
+from ship import Ship
 
 
 class Scoreboard:
@@ -20,6 +22,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ships()
 
     def prep_score(self):
         '''将得分转化成一幅图'''
@@ -75,6 +78,19 @@ class Scoreboard:
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
 
+    def prep_ships(self):
+        '''显示剩下多少飞船'''
+        '''
+        为填充这个编组，根据玩家还有多少艘飞船以相应的次数运行一个循环（见❷）。在这个循环中，创建新飞船并设置其[插图]坐标，让整个飞船编组都位于屏幕左边，且每艘飞船的左边距都为10像素（见❸）。还将[插图]坐标设置为离屏幕上边缘10像素，让所有飞船都出现在屏幕左上角（见❹）。
+        最后，将每艘新飞船都添加到编组ships中（见❺）。
+        '''
+        self.ships = Group()
+        for ship_number in range(self.stats.ships_left):
+            ship = Ship(self.ai_game)
+            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.y = 10
+            self.ships.add(ship)
+
     def show_score(self):
         '''显示得分'''
         self.screen.blit(
@@ -89,4 +105,4 @@ class Scoreboard:
             self.level_image,
             self.level_rect
         )
-        # self.ship.draw(self.screen)
+        self.ships.draw(self.screen)
