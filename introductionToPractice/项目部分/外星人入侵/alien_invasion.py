@@ -69,7 +69,7 @@ class AlienInvasion:
         飞船的高度以及外星人群最初与飞船之间的距离（外星人高度的两倍）：
         '''
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        available_space_y = (self.settings.screen_height - (2 * alien_height) - ship_height)
         numbers_rows = available_space_y // (2 * alien_height)
 
         # 创建一行外星人
